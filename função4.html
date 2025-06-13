@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Gerador de Senhas</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 8px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .resultado {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gerador de Senhas</h1>
+
+    <label for="comprimento">Comprimento da senha (mínimo 4):</label>
+    <input type="number" id="comprimento" placeholder="Ex: 8">
+
+    <button onclick="mostrarSenha()">Gerar Senha</button>
+
+    <div class="resultado" id="resultado"></div>
+
+    <script>
+        function gerarSenha(comprimento) {
+            if (typeof comprimento !== 'number' || isNaN(comprimento) || comprimento < 4) {
+                return 'Erro: informe um comprimento numérico válido (mínimo de 4)';
+            }
+
+            const letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
+            const numeros = "0987654321";
+            const todos = letrasMaiusculas + letrasMinusculas + numeros;
+            let senha = "";
+
+            senha += letrasMaiusculas[Math.floor(Math.random() * letrasMaiusculas.length)];
+            senha += letrasMinusculas[Math.floor(Math.random() * letrasMinusculas.length)];
+            senha += numeros[Math.floor(Math.random() * numeros.length)];
+
+            for (let i = senha.length; i < comprimento; i++) {
+                senha += todos[Math.floor(Math.random() * todos.length)];
+            }
+
+            senha = senha.split('').sort(() => Math.random() - 0.5).join('');
+            return senha;
+        }
+
+        function mostrarSenha() {
+            const comprimento = parseInt(document.getElementById('comprimento').value);
+            const senha = gerarSenha(comprimento);
+            document.getElementById('resultado').innerText = senha;
+        }
+    </script>
+</body>
+</html>

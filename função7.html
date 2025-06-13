@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Filtrar Palavras por Comprimento</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 8px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .resultado {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Filtrar Palavras</h1>
+
+    <label for="lista">Palavras (separadas por vírgula):</label>
+    <input type="text" id="lista" placeholder="Ex: casa, carro, amor">
+
+    <label for="comprimento">Comprimento mínimo:</label>
+    <input type="number" id="comprimento" placeholder="Ex: 4">
+
+    <button onclick="mostrarResultado()">Filtrar</button>
+
+    <div class="resultado" id="resultado"></div>
+
+    <script>
+        function filtrarPalavras(palavras, comprimento) {
+            if (!Array.isArray(palavras) || typeof comprimento !== 'number') {
+                return 'Erro: entrada inválida.';
+            }
+
+            return palavras.filter(palavra => palavra.length >= comprimento);
+        }
+
+        function mostrarResultado() {
+            const lista = document.getElementById('lista').value;
+            const comprimento = parseInt(document.getElementById('comprimento').value);
+
+            const palavrasArray = lista.split(',').map(p => p.trim()).filter(p => p.length > 0);
+
+            const resultado = filtrarPalavras(palavrasArray, comprimento);
+            document.getElementById('resultado').innerText = 
+                Array.isArray(resultado) ? `Palavras filtradas: ${resultado.join(', ')}` : resultado;
+        }
+    </script>
+</body>
+</html>
