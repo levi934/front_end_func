@@ -12,3 +12,6 @@ Cálculo de valores.
 Manipulação de eventos.
 
 Atualização dinâmica do conteúdo da página.
+
+ Objetivo
+O projeto tem como objetivo exercitar a criação e utilização de funções em JavaScript, promovendo o entendimento da modularização de código e boas práticas no desenvolvimento front-end.
